@@ -32,7 +32,7 @@ lib32disabled=yes
 conflicts="firefox-esr>=0"
 
 build_options="alsa jack dbus pulseaudio xscreensaver sndio wayland lto pgo clang wasi debug"
-build_options_default="alsa jack dbus pulseaudio xscreensaver sndio wayland clang wasi"
+build_options_default="alsa jack dbus pulseaudio xscreensaver sndio wayland lto clang wasi"
 
 if [ "$XBPS_WORDSIZE" != "32" ]; then
 	build_options_default+=" debug"
