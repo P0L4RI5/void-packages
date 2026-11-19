@@ -23,7 +23,7 @@ echo "$base $tip" >/tmp/revisions
 
 /bin/echo -e '\x1b[32mChanged packages:\x1b[0m'
 git diff-tree -r --no-renames --name-only --diff-filter=AM \
-	"$base" "$tip" \
+	HEAD^ HEAD \
 	-- 'srcpkgs/*/template' |
 	cut -d/ -f 2 |
 	xargs ./xbps-src sort-dependencies |
