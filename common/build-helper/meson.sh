@@ -9,6 +9,13 @@ if [ -z "$CROSS_BUILD" ]; then
 	[ -e "${XBPS_WRAPPERDIR}/meson/xbps_meson.native" ] && [ -z "$XBPS_BUILD_FORCEMODE" ] && return 0
 	mkdir -p "${XBPS_WRAPPERDIR}/meson"
 	cat > "${XBPS_WRAPPERDIR}/meson/xbps_meson.native" <<-EOF
+		[binaries]
+		c = 'clang-${_llvmver}'
+		cpp = 'clang++-${_llvmver}'
+		strip = 'llvm-strip-${_llvmver}'
+		c_ld = 'lld'
+		cpp_ld = 'lld'
+
 		[built-in options]
 		prefix = '/usr'
 		libdir = '/usr/lib${XBPS_TARGET_WORDSIZE}'
@@ -27,8 +34,10 @@ if [ -z "$CROSS_BUILD" ]; then
 		buildtype = 'plain'
 		auto_features = 'auto'
 		wrap_mode = 'nodownload'
+		strip = true
 
 		b_lto = true
+		b_lto_mode = 'thin'
 		b_ndebug = 'true'
 		b_staticpic = true
 
